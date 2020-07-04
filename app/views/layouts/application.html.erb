@@ -26,20 +26,18 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
           <li class="nav-item">
             <%= link_to "New post", new_post_path, class: "nav-link"%>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
+          <% if current_user %>
+          <% else %>
+            <li>
+              <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
+            </li> 
+            <li>
+              <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>
