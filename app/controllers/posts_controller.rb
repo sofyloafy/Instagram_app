@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :require_login
+
   def new
     @post = Post.new
   end
@@ -26,5 +28,12 @@ class PostsController < ApplicationController
 
   def permit_post
     params.require(:post).permit(:image, :description)
+  end
+
+  def require_login
+    if current_user.nil?
+      flash[:error] = 'Please log in to continue 🔐'
+      redirect_to new_user_session_path
+    end
   end
 end
